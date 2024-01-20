@@ -65,8 +65,8 @@ jobs:
         with:
          access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
          secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-         registry: ${{ secrets.REGISTRY }}
-         repo: ${{ env.ECR_REPOSITORY }}
+         registry: 656967617759.dkr.ecr.us-east-1.amazonaws.com/my-app
+         repo: my-vprofile
          region: ${{ env.AWS_REGION }}
          tags: latest,${{ github.run_number }}
          daemon_off: false
