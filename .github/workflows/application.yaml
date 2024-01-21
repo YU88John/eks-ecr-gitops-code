@@ -93,6 +93,9 @@ jobs:
       - name: Print config file
         run: cat ~/.kube/config
 
+      - name: Test kubectl
+        run: kubectl get nodes
+
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
@@ -111,7 +114,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
           cluster-name: ${{ env.EKS_CLUSTER }}
-          #config-files: .github/values/dev.yaml
+          config-files: .github/values/dev.yaml
           chart-path: helm/mylab-charts
           namespace: default
           values: appimage=${{ secrets.REGISTRY }}/${{ env.ECR_REPOSITORY }},apptag=${{ github.run_number }}
