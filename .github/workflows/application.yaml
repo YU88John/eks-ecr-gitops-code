@@ -97,6 +97,10 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Display AWS CLI Configuration
+        run: aws configure list
+
+
       # - name: Login to ECR
       #   run: kubectl create secret docker-registry regcred --docker-server=${{ secrets.REGISTRY }} --docker-username=AWS  --docker-password=$(aws ecr get-login-password) 
       
