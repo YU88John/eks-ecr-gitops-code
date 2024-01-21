@@ -99,8 +99,6 @@ jobs:
       # - name: Print config file
       #   run: cat ~/.kube/config
 
-      # - name: Test kubectl
-      #   run: kubectl --kubeconfig=$HOME/.kube/config get nodes
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -112,6 +110,10 @@ jobs:
       - name: Get kubeconfig for kubectl
         id: getconfig
         run: aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER }} 
+
+      
+      - name: Test kubectl
+        run: kubectl --kubeconfig=/home/runner/.kube/config get nodes
 
       - name: Login to Amazon ECR
         id: login-ecr
