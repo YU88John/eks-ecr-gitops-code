@@ -1,5 +1,11 @@
-name: my-gitops-app-actions
+name: My-gitops-app-actions
 on: workflow_dispatch
+# Use this for automated CI/CD
+# on: 
+#   push: 
+#     branches: 
+#       - main
+
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: my-app	

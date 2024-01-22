@@ -1,19 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: vpro-ingress
+  name: app-ingress
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   ingressClassName: nginx
   rules:
-  - host: vprofile.thehkh.com
+  - host: devops.cloudminn.co
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: my-app
+            name: main-app-svc
             port:
               number: 8080

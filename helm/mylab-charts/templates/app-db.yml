@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-db
+  labels:
+    app: app-db
+spec:
+  selector:
+    matchLabels:
+      app: app-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app-db
+    spec:
+      containers:
+      - name: app-db
+        image: kubeje2/devopsapp
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - name: app-db-port
+          containerPort: 3306
+        env: 
+         - name: MYSQL_ROOT_PASSWORD
+           valueFrom:
+             secretKeyRef:
+               name: app-secret
+               key: db-pass
+#        env:
+#         - name: MYSQL_ROOT_PASSWORD
+#           value: "app-dbpass"
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-db-svc
+spec:
+  ports:
+  - port: 3306
+    targetPort: app-db-port
+    protocol: TCP
+  selector:
+    app: app-db
+  type: ClusterIP
+
